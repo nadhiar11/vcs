@@ -1,0 +1,25 @@
+JvmtiExport can_access_local_variables 0
+JvmtiExport can_hotswap_or_post_breakpoint 0
+JvmtiExport can_post_on_exceptions 0
+# 116 ciObject found
+ciMethod java/lang/Object <init> ()V 4097 1 1830 0 -1
+ciMethod java/lang/String <init> ([CII)V 2249 1 588 0 -1
+ciMethod java/lang/AbstractStringBuilder <init> (I)V 897 1 112 0 -1
+ciMethod java/lang/AbstractStringBuilder append (Ljava/lang/String;)Ljava/lang/AbstractStringBuilder; 1641 1 205 0 -1
+ciMethod java/lang/AbstractStringBuilder append (I)Ljava/lang/AbstractStringBuilder; 0 0 1 0 -1
+ciMethod java/lang/StringBuilder <init> ()V 697 1 87 0 -1
+ciMethod java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 1473 1 184 0 -1
+ciMethod java/lang/StringBuilder append (I)Ljava/lang/StringBuilder; 0 0 1 0 -1
+ciMethod java/lang/StringBuilder toString ()Ljava/lang/String; 753 1 94 0 -1
+ciMethodData java/lang/Object <init> ()V 2 1831 orig 144 152 11 168 83 0 0 0 0 136 4 61 20 0 0 0 0 168 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 57 41 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 3 0 0 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethodData java/lang/String <init> ([CII)V 1 588 orig 144 152 11 168 83 0 0 0 0 64 49 61 20 0 0 0 0 112 1 0 0 144 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 1 0 0 153 9 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 9 0 3 0 1 0 176 0 0 0 255 255 255 255 0 0 0 0 2 0 1 0 0 0 0 0 data 22 0x10002 0x133 0x50007 0x133 0x30 0x0 0xd0002 0x0 0x120007 0x133 0x30 0x0 0x1a0002 0x0 0x230007 0x133 0x30 0x0 0x2d0002 0x0 0x370002 0x133 oops 0
+ciMethod java/io/DataInput readFully ([BII)V 0 0 1 0 -1
+ciMethod java/io/DataInput readUnsignedShort ()I 0 0 1 0 -1
+ciMethod java/io/DataInputStream readFully ([BII)V 2041 2041 255 0 -1
+ciMethod java/io/DataInputStream readUnsignedShort ()I 1921 1 235 0 -1
+ciMethod java/io/DataInputStream readUTF (Ljava/io/DataInput;)Ljava/lang/String; 1745 29385 204 0 -1
+ciMethodData java/lang/StringBuilder <init> ()V 1 87 orig 144 152 11 168 83 0 0 0 0 16 64 68 20 0 0 0 0 184 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 87 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 16 0 0 0 255 255 255 255 0 0 0 0 2 0 3 0 0 0 0 0 data 2 0x30002 0x0 oops 0
+ciMethodData java/lang/AbstractStringBuilder <init> (I)V 1 112 orig 144 152 11 168 83 0 0 0 0 248 3 68 20 0 0 0 0 192 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 112 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 16 0 0 0 255 255 255 255 0 0 0 0 2 0 1 0 0 0 0 0 data 2 0x10002 0x0 oops 0
+ciMethodData java/lang/StringBuilder append (I)Ljava/lang/StringBuilder; 1 0 orig 144 152 11 168 83 0 0 0 0 232 71 68 20 0 0 0 0 192 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 16 0 0 0 255 255 255 255 0 0 0 0 2 0 2 0 0 0 0 0 data 2 0x20002 0x0 oops 0
+ciMethodData java/lang/AbstractStringBuilder append (I)Ljava/lang/AbstractStringBuilder; 1 0 orig 144 152 11 168 83 0 0 0 0 208 23 68 20 0 0 0 0 120 1 0 0 152 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 200 0 0 0 255 255 255 255 0 0 0 0 7 0 3 0 0 0 0 0 data 25 0x30007 0x0 0x50 0x0 0x90005 0x0 0x0 0x0 0x0 0x0 0x100007 0x0 0x48 0x0 0x150002 0x0 0x1a0003 0x0 0x28 0x1e0002 0x0 0x2b0002 0x0 0x340002 0x0 oops 0
+ciMethodData java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 1 184 orig 144 152 11 168 83 0 0 0 0 40 67 68 20 0 0 0 0 192 0 0 0 0 0 0 0 0 0 0 0 0 

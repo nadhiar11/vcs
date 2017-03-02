@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Tugas Akhir</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="name">Fullname</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">SELESAI</string>
+
+    <string name="slide_1_title">Selamat Datang!</string>
+    <string name="slide_1_desc">Aplikasi ini merupakan Tugas Akhir saya!</string>
+
+    <string name="slide_2_title">Mudah Digunakan</string>
+    <string name="slide_2_desc">Aplikasi yang mudah digunakan dan user friendly!</string>
+
+    <string name="slide_3_title">Anti Lupa</string>
+    <string name="slide_3_desc">Tidak perlu galau walau lupa password!</string>
+
+    <string name="slide_4_title">Semoga Bermanfaat</string>
+    <string name="slide_4_desc">Semoga aplikasi ini dapat bermanfaat untuk anda!</string>
+
+</resources>
