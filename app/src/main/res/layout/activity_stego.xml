@@ -41,6 +41,7 @@
         android:paddingTop="10dp" />
 
     <TextView
+        android:id="@+id/txCover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -55,10 +56,10 @@
         android:paddingTop="10dp">
 
         <Button
+            android:id="@+id/sisip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="sisip"
             android:text="sisipkan" />
 
         <Button
