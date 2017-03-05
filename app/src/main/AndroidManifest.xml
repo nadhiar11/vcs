@@ -28,11 +28,11 @@
         <activity android:name=".Activity_Splash" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Register" />
-        <activity android:name=".Activity_Forgot" />
         <activity android:name=".Utama" />
         <activity android:name=".Kompresi" />
         <activity android:name=".Stego" />
-        <activity android:name=".Akhir"></activity>
+        <activity android:name=".Akhir" />
+        <activity android:name=".Activity_Forgot"></activity>
     </application>
 
 </manifest>

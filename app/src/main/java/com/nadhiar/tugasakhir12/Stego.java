@@ -159,7 +159,7 @@ public class Stego extends AppCompatActivity {
 
                 //save hasil stego
                 try {
-                    BmpStegoImage.compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(new File("/sdcard/" + name + "_stego.png")));
+                    BmpStegoImage.compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(new File("/sdcard/FMP" + name + "_stego.png")));
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
