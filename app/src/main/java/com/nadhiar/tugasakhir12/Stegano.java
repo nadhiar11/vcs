@@ -10,26 +10,22 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nadhiar.tugasakhir12.helper.SQLiteHandler;
 import com.nadhiar.tugasakhir12.helper.SessionManager;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 
-public class Kompresi extends AppCompatActivity {
-    private ImageView sh1, sh1kom,stegomedia;
-    private Button kompresi;
-    private Bitmap sha1, BmpShare1,BmpCover, BmpStegoImage;
+public class Stegano extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
-    public int idx,indexingW, indexingH;
+    private ImageView sh1, stegomed;
+    private Bitmap BmpShare1, BmpCover, BmpStegoImage;
+    public int idx, indexingW, indexingH;
     public String absoluteFilePathSource, name;
     public SQLiteHandler db;
     public SessionManager session;
@@ -37,42 +33,29 @@ public class Kompresi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kompresi);
+        setContentView(R.layout.activity_stegano);
 
-        sh1 = (ImageView) findViewById(R.id.imshare1);
-        sh1kom = (ImageView) findViewById(R.id.imsharekom);
-        stegomedia = (ImageView)findViewById(R.id.stegomed);
-        kompresi = (Button) findViewById(R.id.btkompres);
+        sh1 = (ImageView) findViewById(R.id.sh1);
+        stegomed = (ImageView) findViewById(R.id.imsteg);
 
-        sha1 = getIntent().getParcelableExtra("kunci1");
-        sh1.setImageBitmap(sha1);
-        sh1.setVisibility(View.INVISIBLE);
-        BmpShare1 = sh1kom.getDrawingCache();
+        BmpShare1 = getIntent().getParcelableExtra("stegano");
+        sh1.setImageBitmap(BmpShare1);
+
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
         name = user.get("name");
 
-        kompresi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                sha1.compress(Bitmap.CompressFormat.PNG, 100, out);
-                Bitmap sh1dec = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                sh1kom.setImageBitmap(sh1dec);
-                sh1kom.setDrawingCacheEnabled(true);
-            }
-        });
     }
 
-    public void ambil(View view){
+    public void stegomedia(View view) {
         Intent AmbilFoto = new Intent(Intent.ACTION_GET_CONTENT);
         AmbilFoto.setType("image/*");
         startActivityForResult(AmbilFoto, PICK_IMAGE);
     }
 
-    public void sisip(View view){
+    public void sisip(View view) {
         BmpCover = BitmapFactory.decodeFile(absoluteFilePathSource); // Gambar bebas
         BmpStegoImage = Bitmap.createBitmap(BmpCover.getWidth(), BmpCover.getHeight(), Bitmap.Config.ARGB_8888);
         indexingW = BmpStegoImage.getWidth() / BmpShare1.getWidth();
@@ -177,11 +160,11 @@ public class Kompresi extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
-    public void next(View view){
-        Intent i = new Intent(Kompresi.this,Akhir.class);
+
+    public void next(View view) {
+        Intent i = new Intent(Stegano.this, Akhir.class);
         startActivity(i);
         finish();
     }
@@ -206,7 +189,7 @@ public class Kompresi extends AppCompatActivity {
                                     "Ukuran gambar terlalu kecil", Toast.LENGTH_LONG)
                                     .show();
                         } else
-                            stegomedia.setImageBitmap(BitmapFactory.decodeFile(absoluteFilePathSource));
+                            stegomed.setImageBitmap(BitmapFactory.decodeFile(absoluteFilePathSource));
                         //txtCover.setText(absoluteFilePathSource);
 
                     }

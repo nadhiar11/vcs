@@ -3,70 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#81f8ea"
+    android:background="@color/dot_light_screen1"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    tools:context="com.nadhiar.tugasakhir12.Stego">
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    tools:context="com.nadhiar.tugasakhir12.Stegano">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
         android:text="Sisipkan Share"
-        android:textColor="#000000"
+        android:textColor="@color/white"
         android:textSize="25sp"
-        android:typeface="monospace" />
+        android:typeface="monospace"
+        android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/sh1kom"
+        android:id="@+id/sh1"
         android:layout_width="match_parent"
         android:layout_height="150dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:onClick="pilih"
-        android:text="Pilih Cover image"
-        android:typeface="monospace" />
+        android:onClick="stegomedia"
+        android:text="Ambil Stegomedia"
+        android:layout_marginBottom="10dp"/>
 
     <ImageView
-        android:id="@+id/imstego"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_height="150dp"
+        android:id="@+id/imsteg"/>
 
     <TextView
-        android:id="@+id/txCover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="Stegomedia Anda"
-        android:textColor="#000000"
-        android:typeface="monospace" />
+        android:textStyle="bold"
+        android:id="@+id/txstego"
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <Button
-            android:id="@+id/sisip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="sisipkan" />
+        android:layout_marginTop="10dp">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="lanjut"
-            android:text="NEXT" />
+            android:text="Sisipkan"
+            android:onClick="sisip"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:onClick="next"/>
     </LinearLayout>
+
 </LinearLayout>

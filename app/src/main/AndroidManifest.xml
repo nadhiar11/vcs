@@ -29,10 +29,12 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".Register" />
         <activity android:name=".Utama" />
-        <activity android:name=".Kompresi" />
-        <activity android:name=".Stego" />
         <activity android:name=".Akhir" />
-        <activity android:name=".Activity_Forgot"></activity>
+        <activity android:name=".Activity_Forgot" />
+        <activity android:name=".Ujicoba" />
+        <activity android:name=".Kompres" />
+        <activity android:name=".Stegano" />
+        <activity android:name=".Kompresi"></activity>
     </application>
 
 </manifest>

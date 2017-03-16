@@ -3,63 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dot_light_screen3"
+    android:background="@color/dot_light_screen1"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     tools:context="com.nadhiar.tugasakhir12.Kompresi">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Share Anda"
+        android:text="Kompresi Share Anda!"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:typeface="monospace" />
+        android:textSize="30sp"
+        android:typeface="monospace"
+        android:layout_marginTop="5dp"/>
 
     <ImageView
-        android:id="@+id/imgsh1"
+        android:id="@+id/imshare1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/imsharekom"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="10dp" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Share Asli"
-        android:typeface="monospace" />
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dot_dark_screen2"
-        android:onClick="kompresi"
-        android:text="Kompresi Share"
-        android:textColor="@color/white" />
+        <Button
+            android:id="@+id/btkompres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kompresi" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="ambil"
+            android:text="Ambil stegomedia"/>
+    </LinearLayout>
 
     <ImageView
-        android:id="@+id/imgsh1kom"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/stegomed"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Share Kompresi"
-        android:typeface="monospace" />
-    
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@color/dot_light_screen1"
-        android:onClick="lanjut"
-        android:text="@string/next"
-        android:textColor="@color/white" />
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="sisip"
+            android:text="Sisipkan"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="next"
+            android:text="next"/>
+    </LinearLayout>
 
 </LinearLayout>

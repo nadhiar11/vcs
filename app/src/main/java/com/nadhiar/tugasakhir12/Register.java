@@ -8,8 +8,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Register extends Activity {
 
@@ -47,9 +52,7 @@ public class Register extends Activity {
     private ImageView share1, share2;
     private SessionManager session;
     private SQLiteHandler db;
-    public String seed;
-    public Bitmap BmpTeksGambar;
-    public Bitmap[] BmpShare = new Bitmap[2];
+    public Bitmap BmpTeksGambar,BmpShare1,BmpShare2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,29 +106,88 @@ public class Register extends Activity {
         if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
             registerUser(name, email, password);
 
-            //==============================================
-            seed = inputPassword.getText().toString().trim();
-            KriptografiVisual_teks vcc = new KriptografiVisual_teks();
-            BmpTeksGambar = vcc.KonversiStringKeBitmap(seed, 300, 100);
-            BmpShare = vcc.EknripsiKriptografiVisual(BmpTeksGambar);
-            //share1.setImageBitmap(BmpTeksGambar);
-            //share1.setVisibility(View.VISIBLE);
-            //===========================================
-            //nanti imageview nya dibuat invisible saja
-            //===========================================
-            share1.setImageBitmap(BmpShare[0]); //utk user
+            KriptografiVisual_teks oke = new KriptografiVisual_teks();
+            BmpTeksGambar = oke.KonversiStringKeBitmap(password,400,100);
+
+            BmpShare1 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
+            BmpShare2 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
+
+            for(int i=0; i<BmpTeksGambar.getWidth()-1; i++){
+                for(int j=0; j<BmpTeksGambar.getHeight()-1; j++){
+                    Random generator = new Random();
+                    int indexing = generator.nextInt(6);
+                    if (i%2 == 0 && j%2 ==0){
+                        if (indexing == 0){
+                            BmpShare1.setPixel(i, j, Color.WHITE);
+                            BmpShare1.setPixel(i, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                        }
+                        if (indexing == 1){
+                            BmpShare1.setPixel(i, j, Color.BLACK);
+                            BmpShare1.setPixel(i, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                        }
+                        if (indexing == 2){
+                            BmpShare1.setPixel(i, j, Color.BLACK);
+                            BmpShare1.setPixel(i, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                        }
+                        if (indexing == 3){
+                            BmpShare1.setPixel(i, j, Color.WHITE);
+                            BmpShare1.setPixel(i, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                        }
+                        if (indexing == 4){
+                            BmpShare1.setPixel(i, j, Color.WHITE);
+                            BmpShare1.setPixel(i, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j, Color.BLACK);
+                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                        }
+                        if (indexing == 5){
+                            BmpShare1.setPixel(i, j, Color.BLACK);
+                            BmpShare1.setPixel(i, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j, Color.WHITE);
+                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                        }
+                    }
+
+                    // Untuk Pixel Hitam
+                    if (BmpTeksGambar.getPixel(i, j)==Color.BLACK){
+                        if (BmpShare1.getPixel(i, j) == Color.BLACK)
+                            BmpShare2.setPixel(i, j, Color.WHITE);
+                        else
+                            BmpShare2.setPixel(i, j, Color.BLACK);
+                    }
+
+                    //Untuk pixel Putih (berikan Noise)
+                    else {
+                        if (BmpShare1.getPixel(i, j) == Color.BLACK)
+                            BmpShare2.setPixel(i, j, Color.BLACK);
+                        else
+                            BmpShare2.setPixel(i, j, Color.WHITE);
+                    }
+
+                }
+            }
+
+            share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk sistem
             share1.setVisibility(View.INVISIBLE);
-            share2.setImageBitmap(BmpShare[1]);//utk sistem
+
+            share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk user
             share2.setVisibility(View.INVISIBLE);
 
-            //fungsi untuk upload share milik sistem
-            Bitmap sh2 = BmpShare[1];
             try {
-                sh2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_sistem.png")));
+                BmpShare1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/mnt/shared/Video/" + name + "_user.png")));
+                BmpShare2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/mnt/shared/Video/" + name + "_sistem.png")));
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
+                //TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
         } else {
             Toast.makeText(getApplicationContext(),
                     "Please enter your details!", Toast.LENGTH_LONG)
@@ -156,7 +218,10 @@ public class Register extends Activity {
                         String email = user.getString("email");
                         String created_at = user.getString("created_at");
 
-                        // Inserting row in users table
+                        // masukkan data
+                        //======================================
+                        // passing ke activity selanjutnya
+                        //======================================
                         db.addUser(name, email, uid, created_at);
                         share1.setDrawingCacheEnabled(true);
                         Bitmap b = share1.getDrawingCache();
@@ -165,9 +230,6 @@ public class Register extends Activity {
                         startActivity(i);
                         //finish();
                     } else {
-
-                        // Error occurred in registration. Get the error
-                        // message
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
@@ -190,7 +252,7 @@ public class Register extends Activity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting params to register url
+                // Posting params ke register url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name);
                 params.put("email", email);
@@ -200,8 +262,6 @@ public class Register extends Activity {
             }
 
         };
-
-        // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
