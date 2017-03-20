@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a9eca8"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.nadhiar.tugasakhir12.Alogin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Terima Kasih Atas Partisipasinya"
+        android:textSize="30sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/txAnda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Anda"
+        android:textColor="@color/dot_light_screen1"
+        android:textSize="25sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/txEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Email"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/txKuesioner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:gravity="center"
+        android:text="Isi kuesioner disini!"
+        android:textColor="@color/dot_dark_screen2"
+        android:textStyle="italic"
+        android:typeface="monospace" />
+
+</LinearLayout>

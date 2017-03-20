@@ -34,7 +34,8 @@
         <activity android:name=".Ujicoba" />
         <activity android:name=".Kompres" />
         <activity android:name=".Stegano" />
-        <activity android:name=".Kompresi"></activity>
+        <activity android:name=".Kompresi" />
+        <activity android:name=".Alogin"></activity>
     </application>
 
 </manifest>
