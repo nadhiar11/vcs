@@ -41,7 +41,6 @@ public class Stegano extends AppCompatActivity {
         BmpShare1 = getIntent().getParcelableExtra("stegano");
         sh1.setImageBitmap(BmpShare1);
 
-
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();

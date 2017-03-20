@@ -25,11 +25,11 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 
 public class Kompresi extends AppCompatActivity {
-    private ImageView sh1, sh1kom,stegomedia;
+    private ImageView sh1, sh1kom, stegomedia;
     private Button kompresi;
-    private Bitmap sha1, BmpShare1,BmpCover, BmpStegoImage;
+    private Bitmap sha1, BmpShare1, BmpCover, BmpStegoImage;
     public static final int PICK_IMAGE = 1;
-    public int idx,indexingW, indexingH;
+    public int idx, indexingW, indexingH;
     public String absoluteFilePathSource, name;
     public SQLiteHandler db;
     public SessionManager session;
@@ -41,13 +41,13 @@ public class Kompresi extends AppCompatActivity {
 
         sh1 = (ImageView) findViewById(R.id.imshare1);
         sh1kom = (ImageView) findViewById(R.id.imsharekom);
-        stegomedia = (ImageView)findViewById(R.id.stegomed);
+        stegomedia = (ImageView) findViewById(R.id.stegomed);
         kompresi = (Button) findViewById(R.id.btkompres);
 
         sha1 = getIntent().getParcelableExtra("kunci1");
         sh1.setImageBitmap(sha1);
         sh1.setVisibility(View.INVISIBLE);
-        BmpShare1 = sh1kom.getDrawingCache();
+        //BmpShare1 = sh1kom.getDrawingCache();
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
@@ -59,20 +59,23 @@ public class Kompresi extends AppCompatActivity {
             public void onClick(View v) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 sha1.compress(Bitmap.CompressFormat.PNG, 100, out);
-                Bitmap sh1dec = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                sh1kom.setImageBitmap(sh1dec);
-                sh1kom.setDrawingCacheEnabled(true);
+                BmpShare1 = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+                sh1kom.setImageBitmap(BmpShare1);
+                //sh1kom.setDrawingCacheEnabled(true);
+                Toast.makeText(getApplication(),"Berhasil dikompresi",Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
 
-    public void ambil(View view){
-        Intent AmbilFoto = new Intent(Intent.ACTION_GET_CONTENT);
-        AmbilFoto.setType("image/*");
-        startActivityForResult(AmbilFoto, PICK_IMAGE);
+    public void ambil(View view) {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, PICK_IMAGE);
     }
 
-    public void sisip(View view){
+    public void sisip(View view) {
         BmpCover = BitmapFactory.decodeFile(absoluteFilePathSource); // Gambar bebas
         BmpStegoImage = Bitmap.createBitmap(BmpCover.getWidth(), BmpCover.getHeight(), Bitmap.Config.ARGB_8888);
         indexingW = BmpStegoImage.getWidth() / BmpShare1.getWidth();
@@ -172,7 +175,7 @@ public class Kompresi extends AppCompatActivity {
 
         //save hasil stego
         try {
-            BmpStegoImage.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/mnt/shared/Video/" + name + "_stego.png")));
+            BmpStegoImage.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_stego.png")));
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -180,8 +183,8 @@ public class Kompresi extends AppCompatActivity {
 
     }
 
-    public void next(View view){
-        Intent i = new Intent(Kompresi.this,Akhir.class);
+    public void next(View view) {
+        Intent i = new Intent(Kompresi.this, Akhir.class);
         startActivity(i);
         finish();
     }

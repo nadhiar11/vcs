@@ -26,11 +26,27 @@
         android:gravity="center"
         android:text="Stegomedia anda" />
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="upstego"
-        android:text="Upload stegomedia" />
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="upstego"
+            android:text="Pilih stegomedia" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="uploadsist"
+            android:text="Pilih Sistem" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,19 +78,12 @@
             android:layout_weight="1"
             android:text="Ekstraksi" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="uploadsist"
-            android:text="Upload Sistem" />
-
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imDekrip"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="150dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

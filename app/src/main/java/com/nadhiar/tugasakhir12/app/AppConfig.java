@@ -5,8 +5,8 @@ package com.nadhiar.tugasakhir12.app;
  */
 public class AppConfig {
     // Server user login url
-    public static String URL_LOGIN = "http://10.0.3.2/api_ta/login.php"; //ip emulator genymotion
+    public static String URL_LOGIN = "http://192.168.75.224/api_ta/login.php"; //ip emulator genymotion 10.0.3.2
 
     // Server user register url
-    public static String URL_REGISTER = "http://10.0.3.2/api_ta/register.php"; //ip emulator genymotion
+    public static String URL_REGISTER = "http://192.168.75.224/api_ta/register.php"; //ip emulator genymotion
 }

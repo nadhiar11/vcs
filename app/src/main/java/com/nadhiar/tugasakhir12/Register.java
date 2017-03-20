@@ -107,7 +107,7 @@ public class Register extends Activity {
             registerUser(name, email, password);
 
             KriptografiVisual_teks oke = new KriptografiVisual_teks();
-            BmpTeksGambar = oke.KonversiStringKeBitmap(password,400,100);
+            BmpTeksGambar = oke.KonversiStringKeBitmap(password,300,100);
 
             BmpShare1 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
             BmpShare2 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
@@ -176,13 +176,11 @@ public class Register extends Activity {
 
             share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk sistem
             share1.setVisibility(View.INVISIBLE);
-
-            share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk user
-            share2.setVisibility(View.INVISIBLE);
-
+            //share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk user
+            //share2.setVisibility(View.INVISIBLE);
             try {
-                BmpShare1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/mnt/shared/Video/" + name + "_user.png")));
-                BmpShare2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/mnt/shared/Video/" + name + "_sistem.png")));
+                //BmpShare1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_user.png")));
+                BmpShare2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_sistem.png")));
             } catch (FileNotFoundException e) {
                 //TODO Auto-generated catch block
                 e.printStackTrace();
