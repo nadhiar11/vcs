@@ -1,35 +1,44 @@
 package com.nadhiar.tugasakhir12;
 
+/**
+ * Created by 1312100999 on 1/25/2017.
+ */
+
+
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nadhiar.tugasakhir12.helper.SQLiteHandler;
 import com.nadhiar.tugasakhir12.helper.SessionManager;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 
+import com.nadhiar.tugasakhir12.algor.lzw.Compressor;
+
 public class Kompresi extends AppCompatActivity {
-    private ImageView sh1, sh1kom, stegomedia;
-    private Button kompresi;
-    private Bitmap sha1, BmpShare1, BmpCover, BmpStegoImage;
+    private ImageView sh1kom, stegomedia;
+    private Bitmap a, BmpShare1, BmpCover, BmpStegoImage;
+    private TextView txSisip;
     public static final int PICK_IMAGE = 1;
-    public int idx, indexingW, indexingH;
+    public int idx, ukur, indexingW, indexingH;
     public String absoluteFilePathSource, name;
     public SQLiteHandler db;
     public SessionManager session;
@@ -39,34 +48,21 @@ public class Kompresi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kompresi);
 
-        sh1 = (ImageView) findViewById(R.id.imshare1);
+        Typeface xtra = Typeface.createFromAsset(getAssets(), "fonts/Lobster.otf");
+
         sh1kom = (ImageView) findViewById(R.id.imsharekom);
         stegomedia = (ImageView) findViewById(R.id.stegomed);
-        kompresi = (Button) findViewById(R.id.btkompres);
+        txSisip = (TextView) findViewById(R.id.txSisip);
+        txSisip.setTypeface(xtra);
 
-        sha1 = getIntent().getParcelableExtra("kunci1");
-        sh1.setImageBitmap(sha1);
-        sh1.setVisibility(View.INVISIBLE);
-        //BmpShare1 = sh1kom.getDrawingCache();
+
+        a = getIntent().getParcelableExtra("kunci1"); // ini bentuknya bitmap bukan file !!
+        sh1kom.setImageBitmap(a);
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
         name = user.get("name");
-
-        kompresi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                sha1.compress(Bitmap.CompressFormat.PNG, 100, out);
-                BmpShare1 = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
-                sh1kom.setImageBitmap(BmpShare1);
-                //sh1kom.setDrawingCacheEnabled(true);
-                Toast.makeText(getApplication(),"Berhasil dikompresi",Toast.LENGTH_LONG).show();
-            }
-        });
-
-
     }
 
     public void ambil(View view) {
@@ -74,6 +70,13 @@ public class Kompresi extends AppCompatActivity {
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, PICK_IMAGE);
     }
+
+    public void kompres(View view) {
+        File f = bitmapToFile(a);
+        BmpShare1 = Compressor.getDefault(this).compressToBitmap(f);
+        Toast.makeText(getApplicationContext(), "Share berhasil dikompresi", Toast.LENGTH_LONG).show();
+    }
+
 
     public void sisip(View view) {
         BmpCover = BitmapFactory.decodeFile(absoluteFilePathSource); // Gambar bebas
@@ -171,7 +174,7 @@ public class Kompresi extends AppCompatActivity {
                     BmpStegoImage.setPixel(i, j, Color.argb(a, r, g, b));
             }
         }
-        Toast.makeText(getApplicationContext(), "Berhasil disisipkan", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Berhasil disisipkan . . . . .", Toast.LENGTH_LONG).show();
 
         //save hasil stego
         try {
@@ -211,11 +214,33 @@ public class Kompresi extends AppCompatActivity {
                         } else
                             stegomedia.setImageBitmap(BitmapFactory.decodeFile(absoluteFilePathSource));
                         //txtCover.setText(absoluteFilePathSource);
-
                     }
                 }
-
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public File bitmapToFile(Bitmap bmp) {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(ukur);
+            bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            byte[] bArr = bos.toByteArray();
+            bos.flush();
+            bos.close();
+
+            FileOutputStream fos = openFileOutput("kom.png", Context.MODE_WORLD_WRITEABLE);
+            fos.write(bArr);
+            fos.flush();
+            fos.close();
+
+            File mFile = new File(getFilesDir().getAbsolutePath(), "kom.png");
+            return mFile;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

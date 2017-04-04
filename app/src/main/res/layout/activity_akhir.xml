@@ -33,8 +33,7 @@
             android:paddingTop="5dp"
             android:text="nama"
             android:textColor="@color/dot_light_screen3"
-            android:textSize="30sp"
-            android:typeface="monospace" />
+            android:textSize="35sp" />
     </LinearLayout>
 
     <Button

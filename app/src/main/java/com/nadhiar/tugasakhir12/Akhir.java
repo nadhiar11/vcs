@@ -1,6 +1,7 @@
 package com.nadhiar.tugasakhir12;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,7 +23,9 @@ public class Akhir extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_akhir);
 
+        Typeface lobs = Typeface.createFromAsset(getAssets(),"fonts/Lobster.otf");
         nama = (TextView) findViewById(R.id.txnama);
+        nama.setTypeface(lobs);
 
         db = new SQLiteHandler(getApplicationContext());
         session = new SessionManager(getApplicationContext());

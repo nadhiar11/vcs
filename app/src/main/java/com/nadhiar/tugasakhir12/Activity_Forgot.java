@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,7 +21,7 @@ public class Activity_Forgot extends AppCompatActivity {
     public static final int PICK_IMAGE_2 = 2;
     private ImageView ekstrak, shsistem, dekrip;
     private Button ekstraksi;
-    private TextView txstego;
+    private TextView txstego,txReko;
     public Bitmap stegoimage,stegoimageload,hasil,shareSistem,shareSistemload,share1;
     public int idx,indexingW, indexingH;
     public String path1,path2;
@@ -30,11 +31,15 @@ public class Activity_Forgot extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot);
 
+        Typeface kau = Typeface.createFromAsset(getAssets(), "fonts/KaushanScript.otf");
+
         ekstrak = (ImageView) findViewById(R.id.imEkstrak);
         shsistem = (ImageView) findViewById(R.id.imSistem);
         dekrip = (ImageView) findViewById(R.id.imDekrip);
         ekstraksi = (Button) findViewById(R.id.btEkstraksi);
         txstego = (TextView) findViewById(R.id.txStegomedia);
+        txReko = (TextView)findViewById(R.id.txReko);
+        txReko.setTypeface(kau);
 
         ekstraksi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +105,7 @@ public class Activity_Forgot extends AppCompatActivity {
                         }
                     }
                 }
-                //tampilkan hasil ke layar
+                //tampilkan hasil dekripsi ke layar
                 dekrip.setImageBitmap(hasil);
 
             }

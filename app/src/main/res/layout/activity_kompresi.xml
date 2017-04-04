@@ -3,25 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dot_light_screen1"
+    android:background="#a18686"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     tools:context="com.nadhiar.tugasakhir12.Kompresi">
 
     <TextView
+        android:id="@+id/txSisip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Kompresi Share Anda!"
+        android:text="Sisipkan Share Anda!"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:typeface="monospace" />
-
-    <ImageView
-        android:id="@+id/imshare1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textSize="35sp" />
 
     <ImageView
         android:id="@+id/imsharekom"
@@ -34,10 +29,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btkompres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="kompres"
             android:text="Kompresi" />
 
         <Button
@@ -45,32 +40,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="ambil"
-            android:text="Pilih stegomedia"/>
+            android:text="Pilih stegomedia" />
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/stegomed"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/stegomed"/>
+        android:layout_height="150dp" />
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:onClick="sisip"
+        android:text="Sisipkan" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="sisip"
-            android:text="Sisipkan"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="next"
-            android:text="next"/>
-    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="next"
+        android:text="next" />
 
 </LinearLayout>

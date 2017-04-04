@@ -2,6 +2,7 @@ package com.nadhiar.tugasakhir12;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,10 +31,17 @@ public class Utama extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utama);
 
+        Typeface xtra = Typeface.createFromAsset(getAssets(), "fonts/Lobster.otf");
+        Typeface kau = Typeface.createFromAsset(getAssets(), "fonts/KaushanScript.otf");
+
         txname = (TextView) findViewById(R.id.name);
+        txname.setTypeface(xtra);
         txemail = (TextView) findViewById(R.id.email);
+        txemail.setTypeface(xtra);
         next = (Button) findViewById(R.id.btnNext);
+        next.setTypeface(kau);
         logout = (Button) findViewById(R.id.logout);
+        logout.setTypeface(kau);
         imshare = (ImageView) findViewById(R.id.share);
 
         final Bitmap bm = getIntent().getParcelableExtra("kunci");
@@ -57,7 +65,7 @@ public class Utama extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //pasing ke activity selanjutnya
+                //passing ke activity selanjutnya
                 imshare.setDrawingCacheEnabled(true);
                 Bitmap c = imshare.getDrawingCache();
                 Intent intent = new Intent(Utama.this, Kompresi.class);

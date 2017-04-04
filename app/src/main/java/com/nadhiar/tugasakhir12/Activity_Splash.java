@@ -5,9 +5,14 @@ package com.nadhiar.tugasakhir12;
  */
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Activity_Splash extends Activity {
+    private TextView txTa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,6 +10,7 @@
     tools:context="com.nadhiar.tugasakhir12.Alogin">
 
     <TextView
+        android:id="@+id/txTrims"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -44,11 +45,20 @@
         android:id="@+id/txKuesioner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="130dp"
         android:gravity="center"
         android:text="Isi kuesioner disini!"
         android:textColor="@color/dot_dark_screen2"
         android:textStyle="italic"
-        android:typeface="monospace" />
+        android:typeface="monospace"
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="keluar"
+        android:background="@color/white"
+        android:text="Logout"
+        android:layout_marginTop="40dp"/>
 
 </LinearLayout>

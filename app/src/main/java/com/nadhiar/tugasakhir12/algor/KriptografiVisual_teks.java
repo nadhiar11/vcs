@@ -18,12 +18,13 @@ public class KriptografiVisual_teks extends Activity {
         Bitmap proses = Bitmap.createBitmap(panjang, lebar, Bitmap.Config.ARGB_8888);
         Canvas text = new Canvas(proses);
         TextPaint textPaint = new TextPaint();
-        textPaint.setTextSize(30);
+        //Typeface nike = Typeface.createFromAsset(getAssets(), "fonts/Nike.ttf"); // Custom font untuk kriptografi visual
+        textPaint.setTextSize(40);
         textPaint.setTextScaleX(1.f);
         textPaint.setAlpha(0);
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTypeface(Typeface.DEFAULT);
+        textPaint.setTypeface(Typeface.DEFAULT_BOLD);
         text.drawText(teks, panjang / 2, lebar * 3 / 4, textPaint);
         return proses;
     }

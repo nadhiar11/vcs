@@ -6,11 +6,13 @@ package com.nadhiar.tugasakhir12;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request.Method;
@@ -33,6 +35,7 @@ public class LoginActivity extends Activity {
     private static final String TAG = Register.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
+    private TextView txLupa;
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
@@ -44,10 +47,17 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Typeface xtra = Typeface.createFromAsset(getAssets(),"fonts/Lobster.otf");
+
         inputEmail = (EditText) findViewById(R.id.email);
+        inputEmail.setTypeface(xtra);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword.setTypeface(xtra);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        btnLinkToRegister.setTypeface(xtra);
+        txLupa = (TextView)findViewById(R.id.txLupa);
+        txLupa.setTypeface(xtra);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -135,8 +145,7 @@ public class LoginActivity extends Activity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
+                        String created_at = user.getString("created_at");
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);

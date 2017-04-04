@@ -8,12 +8,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,39 +49,40 @@ public class Register extends Activity {
     private ImageView share1, share2;
     private SessionManager session;
     private SQLiteHandler db;
-    public Bitmap BmpTeksGambar,BmpShare1,BmpShare2;
+    public Bitmap BmpTeksGambar, BmpShare1, BmpShare2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        Typeface kau = Typeface.createFromAsset(getAssets(), "fonts/KaushanScript.otf");
+
         inputFullName = (EditText) findViewById(R.id.name);
+        inputFullName.setTypeface(kau);
         inputEmail = (EditText) findViewById(R.id.email);
+        inputEmail.setTypeface(kau);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword.setTypeface(kau);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        btnLinkToLogin.setTypeface(kau);
         share1 = (ImageView) findViewById(R.id.share1);
         share2 = (ImageView) findViewById(R.id.share2);
 
-        // Progress dialog
+
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        // Session manager
         session = new SessionManager(getApplicationContext());
-
-        // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
-
         if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
             Intent intent = new Intent(Register.this,
                     Utama.class);
             startActivity(intent);
             finish();
         }
 
-        // Link to Login Screen
+
         btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -107,56 +105,56 @@ public class Register extends Activity {
             registerUser(name, email, password);
 
             KriptografiVisual_teks oke = new KriptografiVisual_teks();
-            BmpTeksGambar = oke.KonversiStringKeBitmap(password,300,100);
+            BmpTeksGambar = oke.KonversiStringKeBitmap(password, 300, 100);
 
-            BmpShare1 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
-            BmpShare2 = Bitmap.createBitmap(BmpTeksGambar.getWidth(),BmpTeksGambar.getHeight(),BmpTeksGambar.getConfig());
+            BmpShare1 = Bitmap.createBitmap(BmpTeksGambar.getWidth(), BmpTeksGambar.getHeight(), BmpTeksGambar.getConfig());
+            BmpShare2 = Bitmap.createBitmap(BmpTeksGambar.getWidth(), BmpTeksGambar.getHeight(), BmpTeksGambar.getConfig());
 
-            for(int i=0; i<BmpTeksGambar.getWidth()-1; i++){
-                for(int j=0; j<BmpTeksGambar.getHeight()-1; j++){
+            for (int i = 0; i < BmpTeksGambar.getWidth() - 1; i++) {
+                for (int j = 0; j < BmpTeksGambar.getHeight() - 1; j++) {
                     Random generator = new Random();
                     int indexing = generator.nextInt(6);
-                    if (i%2 == 0 && j%2 ==0){
-                        if (indexing == 0){
+                    if (i % 2 == 0 && j % 2 == 0) {
+                        if (indexing == 0) {
                             BmpShare1.setPixel(i, j, Color.WHITE);
-                            BmpShare1.setPixel(i, j+1, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i, j + 1, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.BLACK);
                         }
-                        if (indexing == 1){
+                        if (indexing == 1) {
                             BmpShare1.setPixel(i, j, Color.BLACK);
-                            BmpShare1.setPixel(i, j+1, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i, j + 1, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.WHITE);
                         }
-                        if (indexing == 2){
+                        if (indexing == 2) {
                             BmpShare1.setPixel(i, j, Color.BLACK);
-                            BmpShare1.setPixel(i, j+1, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i, j + 1, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.WHITE);
                         }
-                        if (indexing == 3){
+                        if (indexing == 3) {
                             BmpShare1.setPixel(i, j, Color.WHITE);
-                            BmpShare1.setPixel(i, j+1, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i, j + 1, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.BLACK);
                         }
-                        if (indexing == 4){
+                        if (indexing == 4) {
                             BmpShare1.setPixel(i, j, Color.WHITE);
-                            BmpShare1.setPixel(i, j+1, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j, Color.BLACK);
-                            BmpShare1.setPixel(i+1, j+1, Color.WHITE);
+                            BmpShare1.setPixel(i, j + 1, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j, Color.BLACK);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.WHITE);
                         }
-                        if (indexing == 5){
+                        if (indexing == 5) {
                             BmpShare1.setPixel(i, j, Color.BLACK);
-                            BmpShare1.setPixel(i, j+1, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j, Color.WHITE);
-                            BmpShare1.setPixel(i+1, j+1, Color.BLACK);
+                            BmpShare1.setPixel(i, j + 1, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j, Color.WHITE);
+                            BmpShare1.setPixel(i + 1, j + 1, Color.BLACK);
                         }
                     }
 
                     // Untuk Pixel Hitam
-                    if (BmpTeksGambar.getPixel(i, j)==Color.BLACK){
+                    if (BmpTeksGambar.getPixel(i, j) == Color.BLACK) {
                         if (BmpShare1.getPixel(i, j) == Color.BLACK)
                             BmpShare2.setPixel(i, j, Color.WHITE);
                         else
@@ -174,9 +172,9 @@ public class Register extends Activity {
                 }
             }
 
-            share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk sistem
+            share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk user
             share1.setVisibility(View.INVISIBLE);
-            //share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk user
+            //share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk sistem
             //share2.setVisibility(View.INVISIBLE);
             try {
                 //BmpShare1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_user.png")));
