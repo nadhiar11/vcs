@@ -12,10 +12,10 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class Activity_Splash extends Activity {
-    private TextView txTa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);

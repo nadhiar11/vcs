@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ijo"
+    android:background="#c6faf3"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -16,88 +16,45 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Rekonstruksi Password"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
-    <TextView
-        android:id="@+id/txStegomedia"
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Stegomedia anda" />
+        android:onClick="upstego"
+        android:text="Pilih stegomedia" />
 
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/imEkstrak"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <EditText
+        android:id="@+id/edEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:hint="Masukkan Email Anda" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="upstego"
-            android:text="Pilih stegomedia" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="uploadsist"
-            android:text="Pilih Sistem" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/btEkstraksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:text="Rekonstruksi Password" />
 
-        <ImageView
-            android:id="@+id/imEkstrak"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/imSistem"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btEkstraksi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ekstraksi" />
-
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/imDekrip"
         android:layout_width="match_parent"
         android:layout_height="150dp" />
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="login"
-            android:text="Login sekarang" />
-
-    </LinearLayout>
+        android:onClick="login"
+        android:text="Login sekarang" />
 
 </LinearLayout>

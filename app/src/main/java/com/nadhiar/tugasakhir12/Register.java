@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nadhiar.tugasakhir12.algor.KriptografiVisual_teks;
 import com.nadhiar.tugasakhir12.app.AppConfig;
 import com.nadhiar.tugasakhir12.app.AppController;
@@ -31,10 +36,9 @@ import com.nadhiar.tugasakhir12.helper.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
 
@@ -49,6 +53,9 @@ public class Register extends Activity {
     private ImageView share1, share2;
     private SessionManager session;
     private SQLiteHandler db;
+    private String UPLOAD_URL = "http://192.168.1.202/api_ta/include/upload.php";
+    private String KEY_IMAGE = "image";
+    private String KEY_NAME = "name";
     public Bitmap BmpTeksGambar, BmpShare1, BmpShare2;
 
     @Override
@@ -96,13 +103,12 @@ public class Register extends Activity {
     }
 
     public void daftar(View view) {
-
         String name = inputFullName.getText().toString().trim();
         String email = inputEmail.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
 
-        if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-            registerUser(name, email, password);
+        if (!name.isEmpty() && !email.isEmpty() && password.length() >= 6) {
+            registrasiUser(name, email, password);
 
             KriptografiVisual_teks oke = new KriptografiVisual_teks();
             BmpTeksGambar = oke.KonversiStringKeBitmap(password, 300, 100);
@@ -172,29 +178,27 @@ public class Register extends Activity {
                 }
             }
 
-            share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk user
-            share1.setVisibility(View.INVISIBLE);
+            //share1.setImageBitmap(BmpShare1); //------------------------------------>> share utk user
+            //share1.setVisibility(View.INVISIBLE);
             //share2.setImageBitmap(BmpShare2); //------------------------------------>> share untuk sistem
             //share2.setVisibility(View.INVISIBLE);
             try {
-                //BmpShare1.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_user.png")));
-                BmpShare2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(new File("/sdcard/" + name + "_sistem.png")));
-            } catch (FileNotFoundException e) {
+                uploadShare();
+            } catch (Exception e) {
                 //TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Please enter your details!", Toast.LENGTH_LONG)
+                    "Masukkan data dengan benar!", Toast.LENGTH_LONG)
                     .show();
         }
-
     }
 
-    private void registerUser(final String name, final String email, final String password) {
+    private void registrasiUser(final String name, final String email, final String password) {
         String tag_string_req = "req_register";
-        pDialog.setMessage("Registering ...");
+        pDialog.setMessage("Sedang mendaftarkan");
         showDialog();
         StringRequest strReq = new StringRequest(Method.POST,
                 AppConfig.URL_REGISTER, new Response.Listener<String>() {
@@ -219,8 +223,8 @@ public class Register extends Activity {
                         // passing ke activity selanjutnya
                         //======================================
                         db.addUser(name, email, uid, created_at);
-                        share1.setDrawingCacheEnabled(true);
-                        Bitmap b = share1.getDrawingCache();
+                        //share1.setDrawingCacheEnabled(true);
+                        Bitmap b = BmpShare1;
                         Intent i = new Intent(Register.this, Utama.class);
                         i.putExtra("kunci", b);
                         startActivity(i);
@@ -270,4 +274,58 @@ public class Register extends Activity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    private void uploadShare() {
+        //Showing the progress dialog
+        //final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //loading.dismiss();
+                        //Showing toast message of the response
+                        Toast.makeText(Register.this, s, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        //loading.dismiss();
+                        Toast.makeText(Register.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+                String image = getStringImage(BmpShare2);
+
+                //Getting Image Name
+                String name = inputEmail.getText().toString().trim();
+
+                //Creating parameters
+                Map<String, String> params = new Hashtable<String, String>();
+
+                //Adding parameters
+                params.put(KEY_IMAGE, image);
+                params.put(KEY_NAME, name);
+
+                //returning parameters
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+    }
+
 }

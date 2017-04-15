@@ -109,6 +109,15 @@ public class LoginActivity extends Activity {
             }
         });
 
+        txLupa.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View view){
+                Intent in = new Intent(LoginActivity.this,Activity_Forgot.class);
+                startActivity(in);
+                finish();
+            }
+        });
+
     }
 
     /**
@@ -205,9 +214,4 @@ public class LoginActivity extends Activity {
             pDialog.dismiss();
     }
 
-    public void lupa (View view){
-        Intent in = new Intent(LoginActivity.this,Activity_Forgot.class);
-        startActivity(in);
-        finish();
-    }
 }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Tugas Akhir</string>
     <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_password">Password min 6 Characters</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>

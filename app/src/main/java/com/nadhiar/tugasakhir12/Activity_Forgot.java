@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +20,10 @@ import android.widget.Toast;
 public class Activity_Forgot extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
     public static final int PICK_IMAGE_2 = 2;
-    private ImageView ekstrak, shsistem, dekrip;
+    private ImageView ekstrak, dekrip;
     private Button ekstraksi;
-    private TextView txstego,txReko;
+    private TextView txReko;
+    private EditText edEmail;
     public Bitmap stegoimage,stegoimageload,hasil,shareSistem,shareSistemload,share1;
     public int idx,indexingW, indexingH;
     public String path1,path2;
@@ -34,16 +36,17 @@ public class Activity_Forgot extends AppCompatActivity {
         Typeface kau = Typeface.createFromAsset(getAssets(), "fonts/KaushanScript.otf");
 
         ekstrak = (ImageView) findViewById(R.id.imEkstrak);
-        shsistem = (ImageView) findViewById(R.id.imSistem);
         dekrip = (ImageView) findViewById(R.id.imDekrip);
         ekstraksi = (Button) findViewById(R.id.btEkstraksi);
-        txstego = (TextView) findViewById(R.id.txStegomedia);
         txReko = (TextView)findViewById(R.id.txReko);
         txReko.setTypeface(kau);
+        edEmail = (EditText)findViewById(R.id.edEmail);
+        edEmail.setTypeface(kau);
 
         ekstraksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //========================
                 //Ekstraksi share
                 //========================
@@ -118,11 +121,6 @@ public class Activity_Forgot extends AppCompatActivity {
         startActivityForResult(AmbilFoto, PICK_IMAGE);
     }
 
-    public void uploadsist(View view) {
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.setType("image/*");
-        startActivityForResult(i, PICK_IMAGE_2);
-    }
 
     public void login(View view){
         Intent i = new Intent(Activity_Forgot.this,LoginActivity.class);
@@ -151,28 +149,10 @@ public class Activity_Forgot extends AppCompatActivity {
                                     .show();
                         } else
                             ekstrak.setImageBitmap(BitmapFactory.decodeFile(path1));
-                            txstego.setText(path1);
+                            //txstego.setText(path1);
 
                     }
                 }
-                break;
-
-            case (PICK_IMAGE_2):
-                if (resultCode == RESULT_OK) {
-                    Uri photoUri = data.getData();
-
-                    if (photoUri != null) {
-
-                        Cursor cursor = getContentResolver().query(photoUri, null, null, null, null);
-                        cursor.moveToFirst();
-                        idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                        path2 = cursor.getString(idx);
-                        shsistem.setImageBitmap(BitmapFactory.decodeFile(path2));
-
-                    }
-                }
-                break;
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
