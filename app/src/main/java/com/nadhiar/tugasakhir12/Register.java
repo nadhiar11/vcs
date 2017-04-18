@@ -53,7 +53,7 @@ public class Register extends Activity {
     private ImageView share1, share2;
     private SessionManager session;
     private SQLiteHandler db;
-    private String UPLOAD_URL = "http://192.168.1.202/api_ta/include/upload.php";
+    private String UPLOAD_URL = "http://192.168.43.45/api_ta/include/upload.php"; // alamat server upload
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "name";
     public Bitmap BmpTeksGambar, BmpShare1, BmpShare2;
@@ -191,7 +191,7 @@ public class Register extends Activity {
 
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Masukkan data dengan benar!", Toast.LENGTH_LONG)
+                    "Mohon masukkan data dengan benar!", Toast.LENGTH_LONG)
                     .show();
         }
     }
@@ -222,6 +222,7 @@ public class Register extends Activity {
                         //======================================
                         // passing ke activity selanjutnya
                         //======================================
+
                         db.addUser(name, email, uid, created_at);
                         //share1.setDrawingCacheEnabled(true);
                         Bitmap b = BmpShare1;
@@ -277,24 +278,21 @@ public class Register extends Activity {
 
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.PNG, 0, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
 
     private void uploadShare() {
-        //Showing the progress dialog
         //final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //loading.dismiss();
-                        //Showing toast message of the response
-                        Toast.makeText(Register.this, s, Toast.LENGTH_LONG).show();
-                    }
-                },
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                //loading.dismiss();
+                Toast.makeText(Register.this, s, Toast.LENGTH_LONG).show();
+            }
+        },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
@@ -305,26 +303,20 @@ public class Register extends Activity {
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                //Converting Bitmap to String
+                //Convert Bitmap ke String
                 String image = getStringImage(BmpShare2);
-
-                //Getting Image Name
                 String name = inputEmail.getText().toString().trim();
-
-                //Creating parameters
                 Map<String, String> params = new Hashtable<String, String>();
 
-                //Adding parameters
+                //Menambahkan parameter
                 params.put(KEY_IMAGE, image);
                 params.put(KEY_NAME, name);
 
-                //returning parameters
                 return params;
             }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
         requestQueue.add(stringRequest);
     }
 

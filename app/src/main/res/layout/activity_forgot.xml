@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c6faf3"
+    android:background="#c6fad3"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -20,6 +20,13 @@
         android:textStyle="bold"
         android:typeface="monospace" />
 
+    <TextView
+        android:id="@+id/txstego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="stego anda" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,33 +35,49 @@
 
 
     <ImageView
-        android:id="@+id/imEkstrak"
+        android:id="@+id/imSistem"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="130dp" />
 
-    <EditText
-        android:id="@+id/edEmail"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Masukkan Email Anda" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="Masukkan Email Anda" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="oke"
+            android:text="ok" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btEkstraksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="Rekonstruksi Password" />
 
 
     <ImageView
         android:id="@+id/imDekrip"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="130dp" />
 
-    <Button
+    <TextView
+        android:id="@+id/txlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="login"
-        android:text="Login sekarang" />
+        android:gravity="center"
+        android:text="Login Sekarang !"
+        android:textSize="20sp" />
 
 </LinearLayout>
