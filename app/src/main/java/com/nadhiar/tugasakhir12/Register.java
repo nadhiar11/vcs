@@ -50,7 +50,6 @@ public class Register extends Activity {
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
-    private ImageView share1, share2;
     private SessionManager session;
     private SQLiteHandler db;
     private String UPLOAD_URL = "http://192.168.43.45/api_ta/include/upload.php"; // alamat server upload
@@ -73,8 +72,6 @@ public class Register extends Activity {
         inputPassword.setTypeface(kau);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         btnLinkToLogin.setTypeface(kau);
-        share1 = (ImageView) findViewById(R.id.share1);
-        share2 = (ImageView) findViewById(R.id.share2);
 
 
         pDialog = new ProgressDialog(this);
@@ -296,7 +293,6 @@ public class Register extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        //Dismissing the progress dialog
                         //loading.dismiss();
                         Toast.makeText(Register.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
                     }

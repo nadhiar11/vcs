@@ -37,7 +37,7 @@
     <ImageView
         android:id="@+id/imSistem"
         android:layout_width="match_parent"
-        android:layout_height="130dp" />
+        android:layout_height="150dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,15 +48,15 @@
             android:id="@+id/edEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:hint="Masukkan Email Anda" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:onClick="oke"
-            android:text="ok" />
+            android:text="OK"/>
 
     </LinearLayout>
 

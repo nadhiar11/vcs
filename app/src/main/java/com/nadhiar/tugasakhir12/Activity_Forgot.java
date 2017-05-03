@@ -56,7 +56,7 @@ public class Activity_Forgot extends AppCompatActivity {
                 //========================
                 //Ekstraksi share
                 //========================
-                //shareSistemload = sistem.getDrawingCache();
+
                 shareSistem = Bitmap.createBitmap(shareSistemload.getWidth(), shareSistemload.getHeight(), Bitmap.Config.ARGB_8888);
 
                 stegoimageload = BitmapFactory.decodeFile(path1);
@@ -127,16 +127,14 @@ public class Activity_Forgot extends AppCompatActivity {
         });
     }
 
+    public void oke (View view){
+        new DownloadImageTask(sistem).execute("http://192.168.43.45/api_ta/include/share/" + edEmail.getText().toString().trim() + ".png");
+    }
+
     public void upstego(View view) {
         Intent AmbilFoto = new Intent(Intent.ACTION_GET_CONTENT);
         AmbilFoto.setType("image/*");
         startActivityForResult(AmbilFoto, PICK_IMAGE);
-    }
-
-    public void oke(View view) {
-        //ambilShare();
-        new DownloadImageTask(sistem).execute("http://192.168.43.45/api_ta/include/share/" + edEmail.getText().toString().trim() + ".png");
-        //sistem.setDrawingCacheEnabled(true);
     }
 
 
@@ -160,7 +158,7 @@ public class Activity_Forgot extends AppCompatActivity {
                                     "Ukuran gambar terlalu kecil", Toast.LENGTH_LONG)
                                     .show();
                         } else
-                            //ekstrak.setImageBitmap(BitmapFactory.decodeFile(path1));
+                            //imstego.setImageBitmap(BitmapFactory.decodeFile(path1));
                             txstego.setText(path1);
 
                     }
